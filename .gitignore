@@ -1,0 +1,37 @@
+```markdown
+# Documentation build outputs
+my-docs/_build/
+my-docs/build/
+my-docs/.vuepress/dist/
+my-docs/.vitepress/dist/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Environment files
+.env
+.env.local
+*.env.*
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+
+# Coverage reports
+coverage/
+htmlcov/
+.coverage
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+```
