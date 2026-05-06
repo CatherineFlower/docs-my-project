@@ -1,12 +1,3 @@
-## Sequence diagram
-
-Ссылка на UniDraw: [https://unidraw.io/app/board/c89cb75281732a592020](https://unidraw.io/app/board/c89cb75281732a592020)
-
-![bLRBJjjG4DtVhxXY1HByG1SLecoG2gg4gcxOcCIqgAw34gSIkoH0QGjg1AAgr0KfKZyWX1YS1yulpFsZpiozTdnZaxQL6i3CcSSvPyQirWAd6jG_U2BO3pnNmc-8LGF64E5d33temYD444hy4a8V_u_KENuVmnt4KXsfKtnqcpw02OmOqXN2AGMLgbo06zLIHmnzLAq5wTJaTb0lktuWTYjrl-nK3p7eajAiO2MCWL0rr34-6AWcnx_U4.svg](5.+Smart+Study+Planner+Sequence+и+Use+case+48ec37d1-ee89-4941-a484-95db160ade26/bLRBJjjG4DtVhxXY1HByG1SLecoG2gg4gcxOcCIqgAw34gSIkoH0QGjg1AAgr0KfKZyWX1YS1yulpFsZpiozTdnZaxQL6i3CcSSvPyQirWAd6jG_U2BO3pnNmc-8LGF64E5d33temYD444hy4a8V_u_KENuVmnt4KXsfKtnqcpw02OmOqXN2AGMLgbo06zLIHmnzLAq5wTJaTb0lktuWTYjrl-nK3p7eajAiO2MCWL0rr34-6AWcnx_U4.svg)
-
-Код:
-
-```Plain Text
 @startuml
 title Формирование недельного учебного плана
 
@@ -71,51 +62,3 @@ else План не подтверждён
 end
 
 @enduml
-```
-
-## Use case diagram
-
-Ссылка на UniDraw: [https://unidraw.io/app/board/c89cb75281732a592020](https://unidraw.io/app/board/c89cb75281732a592020)
-
-![image.png](5.+Smart+Study+Planner+Sequence+и+Use+case+48ec37d1-ee89-4941-a484-95db160ade26/image.png)
-
-Код:
-
-```Plain Text
-@startuml
-left to right direction
-title Use Case Diagram — Smart Study Planner
-
-actor "Студент" as Student
-actor "LMS вуза" as LMS
-actor "Календарь студента" as Calendar
-
-rectangle "Smart Study Planner" {
-  usecase "Сформировать\nнедельный план" as UC1
-  usecase "Импортировать\nдедлайны из LMS" as UC2
-  usecase "Получить события\nиз календаря" as UC3
-  usecase "Определить приоритет\nзадач" as UC4
-  usecase "Проверить перегруз\nпо дням" as UC5
-  usecase "Скорректировать план\nвручную" as UC6
-  usecase "Сохранить план" as UC7
-}
-
-Student -- UC1
-Student -- UC6
-Student -- UC7
-
-LMS --> UC2
-Calendar --> UC3
-
-UC1 ..> UC2 : <<include>>
-UC1 ..> UC3 : <<include>>
-UC1 ..> UC4 : <<include>>
-UC1 ..> UC5 : <<include>>
-UC6 ..> UC1 : <<extend>>
-UC7 ..> UC1 : <<extend>>
-
-@enduml
-```
-
-![image.png](5.+Smart+Study+Planner+Sequence+и+Use+case+48ec37d1-ee89-4941-a484-95db160ade26/image 1.png)
-

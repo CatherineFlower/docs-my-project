@@ -1,0 +1,33 @@
+@startuml
+left to right direction
+title Use Case Diagram — Smart Study Planner
+
+actor "Студент" as Student
+actor "LMS вуза" as LMS
+actor "Календарь студента" as Calendar
+
+rectangle "Smart Study Planner" {
+  usecase "Сформировать\nнедельный план" as UC1
+  usecase "Импортировать\nдедлайны из LMS" as UC2
+  usecase "Получить события\nиз календаря" as UC3
+  usecase "Определить приоритет\nзадач" as UC4
+  usecase "Проверить перегруз\nпо дням" as UC5
+  usecase "Скорректировать план\nвручную" as UC6
+  usecase "Сохранить план" as UC7
+}
+
+Student -- UC1
+Student -- UC6
+Student -- UC7
+
+LMS --> UC2
+Calendar --> UC3
+
+UC1 ..> UC2 : <<include>>
+UC1 ..> UC3 : <<include>>
+UC1 ..> UC4 : <<include>>
+UC1 ..> UC5 : <<include>>
+UC6 ..> UC1 : <<extend>>
+UC7 ..> UC1 : <<extend>>
+
+@enduml

@@ -1,0 +1,84 @@
+asyncapi: 3.0.0
+info:
+  title: Smart Study Planner Async API
+  version: 1.0.0
+  description: Асинхронное взаимодействие для генерации недельного плана
+
+servers:
+  production:
+    host: api.smartplanner.com
+    protocol: wss
+    description: WebSocket сервер
+
+channels:
+  planGenerationStatus:
+    address: /ws/plans/generation-status
+    messages:
+      PlanGenerationStatusMessage:
+        $ref: '#/components/messages/PlanGenerationStatusMessage'
+
+operations:
+  receivePlanGenerationStatus:
+    action: receive
+    channel:
+      $ref: '#/channels/planGenerationStatus'
+    summary: Получение статуса генерации плана
+    messages:
+      - $ref: '#/channels/planGenerationStatus/messages/PlanGenerationStatusMessage'
+
+components:
+  messages:
+    PlanGenerationStatusMessage:
+      name: PlanGenerationStatusMessage
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/PlanGenerationStatusPayload'
+
+  schemas:
+    PlanGenerationStatusPayload:
+      type: object
+      required:
+        - eventType
+        - generationId
+        - userId
+        - status
+        - timestamp
+      properties:
+        eventType:
+          type: string
+          enum:
+            - plan.generation.queued
+            - plan.generation.processing
+            - plan.generation.completed
+            - plan.generation.failed
+        generationId:
+          type: string
+          format: uuid
+        userId:
+          type: string
+          format: uuid
+        status:
+          type: string
+          enum:
+            - queued
+            - processing
+            - completed
+            - failed
+        progress:
+          type: integer
+          minimum: 0
+          maximum: 100
+          nullable: true
+        planId:
+          type: string
+          format: uuid
+          nullable: true
+        errorCode:
+          type: string
+          nullable: true
+        message:
+          type: string
+          nullable: true
+        timestamp:
+          type: string
+          format: date-time
