@@ -75,7 +75,7 @@ const config = {
           items: [
             {
               label: 'Обзор проекта',
-              to: '/intro',
+              to: '/',
             },
             {
               label: 'REST API',
