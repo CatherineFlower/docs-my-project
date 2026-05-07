@@ -1,45 +1,49 @@
+// @ts-check
+
 const sidebars = {
   docsSidebar: [
     'intro',
     {
       type: 'category',
+      label: 'Концепция',
+      collapsed: false,
+      items: ['concept/overview', 'concept/business-model', 'concept/stakeholders'],
+    },
+    {
+      type: 'category',
       label: 'Требования',
       collapsed: false,
-      items: [
-        'requirements/business',
-        'requirements/functional',
-        'requirements/non-functional',
-        'requirements/stakeholders-raci',
-      ],
+      items: ['requirements/business-requirements', 'requirements/functional-requirements', 'requirements/non-functional-requirements', 'requirements/raci'],
     },
     {
       type: 'category',
-      label: 'UX и интерфейсы',
+      label: 'UI и сценарии',
       collapsed: false,
-      items: ['ui/wireframes'],
+      items: ['ui/wireframes', 'ui/user-scenarios', 'ui/ui-api-mapping'],
     },
     {
       type: 'category',
-      label: 'Архитектура и данные',
+      label: 'Архитектура',
       collapsed: false,
-      items: [
-        'architecture/overview',
-        'architecture/data-storage',
-        'architecture/erd',
-        'architecture/integrations-platform',
-      ],
+      items: ['architecture/overview', 'architecture/components', 'architecture/data-storage', 'architecture/data-model', 'architecture/erd', 'architecture/bpmn', 'architecture/integrations-platform'],
     },
     {
       type: 'category',
-      label: 'Процессы и диаграммы',
+      label: 'Процессы',
       collapsed: false,
-      items: ['processes/bpmn-dmn', 'diagrams/sequence-use-case'],
+      items: ['processes/bpmn-dmn'],
+    },
+    {
+      type: 'category',
+      label: 'Диаграммы',
+      collapsed: false,
+      items: ['diagrams/use-case', 'diagrams/sequence', 'diagrams/erd'],
     },
     {
       type: 'category',
       label: 'API',
       collapsed: false,
-      items: ['api/rest-api', 'api/async-api'],
+      items: ['api/overview', 'api/rest-api', 'api/async-api'],
     },
     {
       type: 'category',
@@ -49,11 +53,17 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'Docs as Code',
+      label: 'Эксплуатация',
       collapsed: false,
-      items: ['operations/docs-as-code', 'operations/deployment-github-pages'],
+      items: ['operations/docs-as-code', 'operations/github-pages'],
+    },
+    {
+      type: 'category',
+      label: 'Шаблоны',
+      collapsed: true,
+      items: ['templates/api-template', 'templates/architecture-template', 'templates/algorithm-template'],
     },
   ],
 };
 
-export default sidebars;
+module.exports = sidebars;

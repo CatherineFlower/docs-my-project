@@ -1,36 +1,34 @@
-import {themes as prismThemes} from 'prism-react-renderer';
+// @ts-check
 
 const config = {
   title: 'Smart Study Planner',
   tagline: 'Техническая документация проекта',
   favicon: 'img/favicon.ico',
+
   url: 'https://catherineflower.github.io',
   baseUrl: '/docs-my-project/',
+
   organizationName: 'CatherineFlower',
   projectName: 'docs-my-project',
   deploymentBranch: 'gh-pages',
   trailingSlash: false,
-  onBrokenLinks: 'warn',
-  onBrokenMarkdownLinks: 'warn',
+
+  onBrokenLinks: 'throw',
+
   i18n: {
     defaultLocale: 'ru',
     locales: ['ru'],
   },
-  markdown: {
-    mermaid: true,
-  },
-  themes: ['@docusaurus/theme-mermaid'],
-  plugins: [
-    ['drawio', {}],
-  ],
+
   presets: [
     [
       'classic',
       {
         docs: {
           sidebarPath: './sidebars.js',
-          routeBasePath: 'docs',
-          editUrl: 'https://github.com/CatherineFlower/docs-my-project/tree/main/my-docs/',
+          routeBasePath: '/',
+          editUrl:
+            'https://github.com/CatherineFlower/docs-my-project/tree/main/my-docs/',
         },
         blog: false,
         theme: {
@@ -38,53 +36,74 @@ const config = {
         },
       },
     ],
-    [
-      'redocusaurus',
-      {
-        specs: [
-          {
-            spec: 'static/api/openapi.yaml',
-            route: '/api/rest',
-          },
-        ],
-        theme: {
-          primaryColor: '#2563eb',
-          options: {
-            hideDownloadButton: false,
-            expandResponses: '200,201',
-          },
-        },
-      },
-    ],
   ],
+
+  themes: ['@docusaurus/theme-mermaid'],
+
+  markdown: {
+    mermaid: true,
+    hooks: {
+      onBrokenMarkdownLinks: 'warn',
+    },
+  },
+
   themeConfig: {
-    image: 'img/sequence-diagram.svg',
+    image: 'img/social-card.png',
+
     navbar: {
-      title: 'Smart Study Planner Docs',
+      title: 'Smart Study Planner',
       items: [
-        {type: 'docSidebar', sidebarId: 'docsSidebar', position: 'left', label: 'Документация'},
-        {to: '/api/rest', label: 'REST API', position: 'left'},
-        {href: 'https://github.com/CatherineFlower/docs-my-project', label: 'GitHub', position: 'right'},
+        {
+          type: 'docSidebar',
+          sidebarId: 'docsSidebar',
+          position: 'left',
+          label: 'Документация',
+        },
+        {
+          href: 'https://github.com/CatherineFlower/docs-my-project',
+          label: 'GitHub',
+          position: 'right',
+        },
       ],
     },
+
     footer: {
       style: 'dark',
       links: [
-        {title: 'Разделы', items: [
-          {label: 'Обзор', to: '/docs/intro'},
-          {label: 'Требования', to: '/docs/requirements/business'},
-          {label: 'Архитектура', to: '/docs/architecture/overview'},
-          {label: 'API', to: '/api/rest'},
-        ]},
+        {
+          title: 'Документация',
+          items: [
+            {
+              label: 'Обзор проекта',
+              to: '/intro',
+            },
+            {
+              label: 'REST API',
+              to: '/api/rest-api',
+            },
+            {
+              label: 'AsyncAPI',
+              to: '/api/async-api',
+            },
+          ],
+        },
+        {
+          title: 'Репозиторий',
+          items: [
+            {
+              label: 'GitHub',
+              href: 'https://github.com/CatherineFlower/docs-my-project',
+            },
+          ],
+        },
       ],
-      copyright: `Smart Study Planner © ${new Date().getFullYear()}`,
+      copyright: `Copyright © ${new Date().getFullYear()} Smart Study Planner.`,
     },
+
     prism: {
-      theme: prismThemes.github,
-      darkTheme: prismThemes.dracula,
       additionalLanguages: ['yaml', 'json', 'sql'],
     },
   },
 };
 
-export default config;
+module.exports = config;

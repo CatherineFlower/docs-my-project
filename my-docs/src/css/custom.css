@@ -6,15 +6,10 @@
   --ifm-color-primary-light: #3b82f6;
   --ifm-color-primary-lighter: #60a5fa;
   --ifm-color-primary-lightest: #93c5fd;
-  --ifm-code-font-size: 95%;
 }
 
-img {
+.markdown img {
   max-width: 100%;
   border: 1px solid var(--ifm-color-emphasis-200);
   border-radius: 8px;
-}
-
-.theme-doc-markdown table {
-  font-size: 0.95rem;
 }
