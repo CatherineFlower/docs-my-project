@@ -1,0 +1,42 @@
+Table users {
+  user_id uuid [pk]
+}
+
+Table user_settings {
+  settings_id uuid [pk]
+  user_id uuid
+}
+
+Table tasks {
+  task_id uuid [pk]
+  user_id uuid
+}
+
+Table calendar_events {
+  event_id uuid [pk]
+  user_id uuid
+}
+
+Table plans {
+  plan_id uuid [pk]
+  user_id uuid
+}
+
+Table planned_tasks {
+  planned_task_id uuid [pk]
+  plan_id uuid
+  task_id uuid
+}
+
+Table activity_logs {
+  log_id uuid [pk]
+  user_id uuid
+}
+
+Ref: user_settings.user_id - users.user_id
+Ref: tasks.user_id > users.user_id
+Ref: calendar_events.user_id > users.user_id
+Ref: plans.user_id > users.user_id
+Ref: planned_tasks.plan_id > plans.plan_id
+Ref: planned_tasks.task_id > tasks.task_id
+Ref: activity_logs.user_id > users.user_id

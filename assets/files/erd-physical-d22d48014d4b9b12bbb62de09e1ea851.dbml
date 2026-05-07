@@ -1,0 +1,115 @@
+Table users {
+  user_id uuid [pk]
+  full_name varchar(150) [not null]
+  email varchar(255) [not null, unique]
+  password_hash varchar(255) [not null]
+  university varchar(255)
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+}
+
+Table user_settings {
+  settings_id uuid [pk]
+  user_id uuid [not null, unique]
+  notifications_enabled boolean [not null, default: true]
+  language varchar(5) [not null, default: 'ru']
+  theme varchar(20) [not null, default: 'light']
+}
+
+Table tasks {
+  task_id uuid [pk]
+  user_id uuid [not null]
+  title varchar(255) [not null]
+  subject varchar(150)
+  description text
+  due_date date
+  estimated_minutes int
+  priority varchar(10) [not null]
+  status varchar(20) [not null]
+  source_type varchar(20)
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+
+  indexes {
+    user_id
+    due_date
+    status
+    priority
+  }
+}
+
+Table calendar_events {
+  event_id uuid [pk]
+  user_id uuid [not null]
+  title varchar(255) [not null]
+  location varchar(255)
+  start_at timestamptz [not null]
+  end_at timestamptz [not null]
+  type varchar(30)
+  source_type varchar(20)
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+
+  indexes {
+    user_id
+    start_at
+  }
+}
+
+Table plans {
+  plan_id uuid [pk]
+  user_id uuid [not null]
+  week_start_date date [not null]
+  week_end_date date [not null]
+  progress_percent smallint [not null, default: 0]
+  status varchar(20) [not null]
+  generation_id uuid
+  generation_status varchar(20)
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+
+  indexes {
+    user_id
+    (user_id, week_start_date) [unique]
+  }
+}
+
+Table planned_tasks {
+  planned_task_id uuid [pk]
+  plan_id uuid [not null]
+  task_id uuid [not null]
+  planned_date date [not null]
+  start_time time
+  end_time time
+  sort_order smallint [not null]
+  task_title_snapshot varchar(255)
+  task_priority_snapshot varchar(10)
+
+  indexes {
+    plan_id
+    task_id
+    planned_date
+    (plan_id, task_id, planned_date) [unique]
+  }
+}
+
+Table activity_logs {
+  log_id uuid [pk]
+  user_id uuid
+  event_type varchar(100) [not null]
+  payload json
+  created_at timestamptz [not null]
+
+  indexes {
+    user_id
+    created_at
+  }
+}
+
+Ref: user_settings.user_id - users.user_id
+Ref: tasks.user_id > users.user_id
+Ref: calendar_events.user_id > users.user_id
+Ref: plans.user_id > users.user_id
+Ref: planned_tasks.plan_id > plans.plan_id
+Ref: planned_tasks.task_id > tasks.task_id
+Ref: activity_logs.user_id > users.user_id

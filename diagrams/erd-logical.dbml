@@ -1,0 +1,86 @@
+Table users {
+  user_id uuid [pk]
+  full_name varchar
+  email varchar
+  password_hash varchar
+  university varchar
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table user_settings {
+  settings_id uuid [pk]
+  user_id uuid
+  notifications_enabled boolean
+  language varchar
+  theme varchar
+}
+
+Table tasks {
+  task_id uuid [pk]
+  user_id uuid
+  title varchar
+  subject varchar
+  description text
+  due_date date
+  estimated_minutes int
+  priority varchar
+  status varchar
+  source_type varchar
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table calendar_events {
+  event_id uuid [pk]
+  user_id uuid
+  title varchar
+  location varchar
+  start_at timestamp
+  end_at timestamp
+  type varchar
+  source_type varchar
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table plans {
+  plan_id uuid [pk]
+  user_id uuid
+  week_start_date date
+  week_end_date date
+  progress_percent int
+  status varchar
+  generation_id uuid
+  generation_status varchar
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table planned_tasks {
+  planned_task_id uuid [pk]
+  plan_id uuid
+  task_id uuid
+  planned_date date
+  start_time time
+  end_time time
+  sort_order int
+  task_title_snapshot varchar
+  task_priority_snapshot varchar
+}
+
+Table activity_logs {
+  log_id uuid [pk]
+  user_id uuid
+  event_type varchar
+  payload text
+  created_at timestamp
+}
+
+Ref: user_settings.user_id - users.user_id
+Ref: tasks.user_id > users.user_id
+Ref: calendar_events.user_id > users.user_id
+Ref: plans.user_id > users.user_id
+Ref: planned_tasks.plan_id > plans.plan_id
+Ref: planned_tasks.task_id > tasks.task_id
+Ref: activity_logs.user_id > users.user_id

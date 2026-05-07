@@ -1,0 +1,49 @@
+openapi: 3.0.3
+info:
+  title: Smart Study Planner API
+  version: 1.0.0
+  description: API для Smart Study Planner
+servers:
+  - url: https://api.smartplanner.com
+paths:
+  /auth/login:
+    post:
+      summary: Авторизация пользователя
+      responses:
+        '200':
+          description: Успешная авторизация
+  /auth/register:
+    post:
+      summary: Регистрация пользователя
+      responses:
+        '201':
+          description: Пользователь зарегистрирован
+  /tasks:
+    get:
+      summary: Получить список задач
+      responses:
+        '200':
+          description: Список задач
+  /calendar/events:
+    get:
+      summary: Получить события календаря
+      responses:
+        '200':
+          description: Список событий
+  /plans/generate:
+    post:
+      summary: Сгенерировать недельный план
+      responses:
+        '202':
+          description: Генерация запущена
+  /plans/weekly:
+    get:
+      summary: Получить недельный план
+      responses:
+        '200':
+          description: Недельный план
+    put:
+      summary: Сохранить недельный план
+      responses:
+        '200':
+          description: План сохранён
